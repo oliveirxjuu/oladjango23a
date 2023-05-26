@@ -6,9 +6,14 @@ from .models import Questao
 
 # explicar isso semana que vem
 def index(request):
-    ultimas_questoes = Questao.objects.order_by("-data")[:5]
-    saida = ", ".join([q.pergunta for q in ultimas_questoes])
-    return HttpResponse(saida)
+    ultimas_questoes = Questao.objects.order_by("data")[:5]
+    # saida = ",".join([q.pergunta for q in ultimas_questoes])
+    # saida = ""
+    # for q in ultimas_questoes:
+    #     linha = f"<p>{q.pergunta}</p>"
+    #     saida = saida + linha
+    context = {'ultimas_questoes': ultimas_questoes}
+    return render(request, 'enquete/index.html', context)
 
 
 def caneta(request):
