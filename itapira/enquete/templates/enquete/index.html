@@ -1,9 +1,23 @@
+<h1>Minhas questoes</h1>
+{# Isso é um comentario de template do Django #}
+{# {%  %} serve para executar codigos como if e for dentro do template #}
+{# {{  }} serve para inserir o valor da variavel dentro do template #}
+{# Verifica se a variavel ultimas_questoes tem conteudo #}
 {% if ultimas_questoes %}
     <ul>
+    {# Faz um for sobre as questoes dentro da variavel #}
     {% for questoes in ultimas_questoes %}
-        <li><a href="/enquete/{{ questoes.id }}/">{{ questoes.pergunta }}</a></li>
+        <li>
+            {# retorna o id da questao {{ questoes.id }} #}
+            <a href="/enquete/{{ questoes.id }}/">
+                {# retorna a pergunta da questao {{ questoes.pergunta }} #}
+                {{ questoes.pergunta }}
+            </a>
+        </li>
+    {# finaliza o bloco for #}
     {% endfor %}
     </ul>
+{# se a variavel ultimas_questoes for vazia #}
 {% else %}
     <p>Nao tem questoes salvas</p>
 {% endif %}
