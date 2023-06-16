@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import Http404
 from .models import Questao
@@ -24,10 +24,12 @@ def caneta(request):
 
 
 def detalhe(request, questao_id):
-    try:
-        questao = Questao.objects.get(pk=questao_id)
-    except Questao.DoesNotExist:
-        raise Http404("Questão não ecxisty")
+    # try:
+    #     questao = Questao.objects.get(pk=questao_id)
+    # except Questao.DoesNotExist:
+    #     raise Http404("Questão não ecxisty")
+    # faz uma consulta e se nao retornar nada levanta um erro 404
+    questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'enquete/detalhe.html', {'questao': questao})
 
 

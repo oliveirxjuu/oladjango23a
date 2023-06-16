@@ -8,8 +8,8 @@
     {# Faz um for sobre as questoes dentro da variavel #}
     {% for questoes in ultimas_questoes %}
         <li>
-            {# retorna o id da questao {{ questoes.id }} #}
-            <a href="/enquete/{{ questoes.id }}/">
+            {# utiliza o name da url para retornar ela #}
+            <a href="{% url 'detalhe' questoes.id %}">
                 {# retorna a pergunta da questao {{ questoes.pergunta }} #}
                 {{ questoes.pergunta }}
             </a>

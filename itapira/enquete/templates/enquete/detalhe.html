@@ -1,1 +1,6 @@
-{{ questao }}
+<h1>{{ questao.pergunta }}</h1>
+<ul>
+{% for respostas in questao.resposta_set.all %}
+    <li>{{ respostas.resposta }}</li>
+{% endfor %}
+</ul>
