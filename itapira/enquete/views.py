@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.http import Http404
-from .models import Questao
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from .models import Questao, Resposta
+
 
 # Create your views here.
 
@@ -39,4 +40,20 @@ def resultados(request, questao_id):
 
 
 def voto(request, questao_id):
-    return HttpResponse("Voce esta votando na questao %s." % questao_id)
+    questao = get_object_or_404(Questao, pk=questao_id)
+    try:
+        resposta = questao.resposta_set.get(pk=request.POST["resposta"])
+    except (KeyError, Resposta.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(
+            request,
+            "enquete/questao.html",
+            {
+                "questao": questao,
+                "error_message": "Esta Resposta naum ecxiste.",
+            },
+        )
+    else:
+        resposta.votos += 1
+        resposta.save()
+        return HttpResponseRedirect(reverse("resultados", args=(questao.id,)))

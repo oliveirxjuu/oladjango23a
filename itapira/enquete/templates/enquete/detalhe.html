@@ -6,7 +6,7 @@
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
     {% for respostas in questao.resposta_set.all %}
-        <input type="radio" name="resposta" id="resposta{{ forloop.counter }}" value="{{ resposta.id }}">
+        <input type="radio" name="resposta" id="resposta{{ forloop.counter }}" value="{{ respostas.id }}">
         <label for="resposta{{ forloop.counter }}">{{ respostas.resposta }}</label><br>
     {% endfor %}
 </fieldset>
