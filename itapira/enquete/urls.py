@@ -3,12 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('felipe', views.caneta, name='caneta'),
+    path('', views.IndexView.as_view(), name='index'),
      # ex: /enquete/5/
-    path("<int:questao_id>/", views.detalhe, name="detalhe"),
+    path("<int:pk>/", views.DetalheView.as_view(), name="detalhe"),
     # ex: /enquete/5/resultados/
-    path("<int:questao_id>/resultados/", views.resultados, name="resultados"),
+    path("<int:pk>/resultados/", views.ResultadosView.as_view(), name="resultados"),
     # ex: /enquete/5/voto/
     path("<int:questao_id>/voto/", views.voto, name="voto"),
 ]

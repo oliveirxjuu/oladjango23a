@@ -1,42 +1,25 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 from .models import Questao, Resposta
 
 
 # Create your views here.
 
-def index(request):
-    # selecionar na tabela questoes os ultimos 5 objetos cadastrados
-    ultimas_questoes = Questao.objects.order_by("data")[:5]
-    # criamos um dicionario em python
-    # (semelhante aos arryas associativos do php)
-    # (ou aos arryas objetos literais do javascript)
-    # onde passamos essa variavel para ser utilizada no template
-    context = {'ultimas_questoes': ultimas_questoes}
-    # retornar a funcao render, passando como argumentos
-    # a requisicao, o template que sera utilizado
-    # e as variaveis de contexto que serao utilizadas dentro do template
-    return render(request, 'enquete/index.html', context)
+class IndexView(generic.ListView):
+    model = Questao
+    template_name = 'enquete/index.html'
 
 
-def caneta(request):
-    return HttpResponse("<h1>Caneta Azul, Azul caneta...</h1>")
+class DetalheView(generic.DetailView):
+    model = Questao
+    template_name = 'enquete/detalhe.html'
 
 
-def detalhe(request, questao_id):
-    # try:
-    #     questao = Questao.objects.get(pk=questao_id)
-    # except Questao.DoesNotExist:
-    #     raise Http404("Questão não ecxisty")
-    # faz uma consulta e se nao retornar nada levanta um erro 404
-    questao = get_object_or_404(Questao, pk=questao_id)
-    return render(request, 'enquete/detalhe.html', {'questao': questao})
-
-
-def resultados(request, questao_id):
-    questao = get_object_or_404(Questao, pk=questao_id)
-    return render(request, 'enquete/resultado.html', {'questao': questao})
+class ResultadosView(generic.DetailView):
+    model = Questao
+    template_name = 'enquete/resultado.html'
 
 
 def voto(request, questao_id):

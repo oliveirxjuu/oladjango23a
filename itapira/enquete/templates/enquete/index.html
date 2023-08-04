@@ -3,10 +3,10 @@
 {# {%  %} serve para executar codigos como if e for dentro do template #}
 {# {{  }} serve para inserir o valor da variavel dentro do template #}
 {# Verifica se a variavel ultimas_questoes tem conteudo #}
-{% if ultimas_questoes %}
+{% if object_list %}
     <ul>
     {# Faz um for sobre as questoes dentro da variavel #}
-    {% for questoes in ultimas_questoes %}
+    {% for questoes in object_list %}
         <li>
             {# utiliza o name da url para retornar ela #}
             <a href="{% url 'detalhe' questoes.id %}">
