@@ -1,3 +1,5 @@
+{% extends "enquete/base.html" %}
+{% block content %}
 <h1>Minhas questoes</h1>
 {# Isso é um comentario de template do Django #}
 {# {%  %} serve para executar codigos como if e for dentro do template #}
@@ -21,3 +23,4 @@
 {% else %}
     <p>Nao tem questoes salvas</p>
 {% endif %}
+{% endblock %}
