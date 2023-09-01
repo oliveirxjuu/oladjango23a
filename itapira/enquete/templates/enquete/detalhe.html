@@ -1,7 +1,5 @@
 {% extends "enquete/base.html" %}
 {% block content %}
-{% load static %}
-<img src="{% static '/img/logo.jpg' %}" alt="">
 <form action="{% url 'voto' questao.id %}" method="post">
 {% csrf_token %}
 <fieldset>

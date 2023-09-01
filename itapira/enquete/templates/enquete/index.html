@@ -6,12 +6,12 @@
 {# {{  }} serve para inserir o valor da variavel dentro do template #}
 {# Verifica se a variavel ultimas_questoes tem conteudo #}
 {% if object_list %}
-    <ul>
+    <ul class="list-group list-group-flush">
     {# Faz um for sobre as questoes dentro da variavel #}
     {% for questoes in object_list %}
-        <li>
+        <li class="list-group-item">
             {# utiliza o name da url para retornar ela #}
-            <a href="{% url 'detalhe' questoes.id %}">
+            <a class="link-dark" href="{% url 'detalhe' questoes.id %}">
                 {# retorna a pergunta da questao {{ questoes.pergunta }} #}
                 {{ questoes.pergunta }}
             </a>
